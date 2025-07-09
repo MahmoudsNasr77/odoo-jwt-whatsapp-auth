@@ -66,12 +66,12 @@ Set JWT Secret Key
 
 You must set the JWT secret before using the API:
 
-# 👚 Odoo Shell
+## 👚 Odoo Shell
 ```
 env['ir.config_parameter'].sudo().set_param('jwt_secret_key', 'your_secret_key_here')
 ```
 
-### 🛠️ Installation
+## 🛠️ Installation
 
 # Clone this repo into your custom-addons folder:
 
@@ -85,14 +85,14 @@ env['ir.config_parameter'].sudo().set_param('jwt_secret_key', 'your_secret_key_h
 
 ## 🧰 Dependencies
 
-# PyJWT
+##### PyJWT
 
 ```pip install PyJWT```
 
-### 🤝 Author
+## 🤝 Author
 
-Mahmoud Sabry
-# 📧 mahmoudsabrynasr@gmail.com
+##### Mahmoud Sabry
+#### 📧 mahmoudsabrynasr@gmail.com
 
 
 
