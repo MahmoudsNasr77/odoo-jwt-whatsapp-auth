@@ -1,0 +1,16 @@
+
+---
+# Odoo Custom Addons - WhatsApp Module
+```gitignore
+*.pyc
+__pycache__/
+*.swp
+*.log
+*.sqlite3
+.env
+*.egg-info/
+.idea/
+*.db
+.DS_Store
+myenv/
+*.bak

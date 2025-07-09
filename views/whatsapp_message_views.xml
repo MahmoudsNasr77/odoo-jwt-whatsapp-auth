@@ -1,0 +1,124 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_whatsapp_message_tree" model="ir.ui.view">
+        <field name="name">whatsapp.message.tree</field>
+        <field name="model">whatsapp.message</field>
+     
+        <field name="arch" type="xml">
+            <tree string="WhatsApp Messages">
+                <header>
+                            <button name="excel_report" type="object" string="Download Excel Report"
+                    class="oe_highlight"  />
+                </header>
+   
+                <field name="sender_name" />
+                <field name="message_body" />
+                <field name="date_sent" />
+                <field name="status" />
+
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_whatsapp_message_form" model="ir.ui.view">
+        <field name="name">whatsapp.message.form</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form string="WhatsApp Message">
+                <sheet>
+                    <group>
+                        <field name="sender_name" />
+                        <field name="message_body" />
+                        <field name="date_sent" />
+
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_message_kanban" model="ir.ui.view">
+        <field name="name">whatsapp.message.kanban</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column" default_group_by="status">
+                <field name="sender_name" />
+                <field name="message_body" />
+                <field name="status" />
+                <field name="date_sent" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_card">
+                            <strong>
+                                <field name="sender_name" />
+                            </strong>
+                            <div>
+                                <field name="message_body" />
+                            </div>
+                            <small>
+                                <field name="date_sent" />
+                            </small>
+                            <div class="mt-2">
+                                <span class="badge"
+                                    t-attf-class="badge #{record.status.raw_value == 'sent' and 'badge-success' or 'badge-danger'}">
+                                    <field name="status" />
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="view_whatsapp_message_calendar" model="ir.ui.view">
+        <field name="name">whatsapp.message.calendar</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <calendar string="WhatsApp Messages Calendar" date_start="date_sent">
+                <field name="sender_name" />
+                <field name="message_body" />
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_message_graph" model="ir.ui.view">
+        <field name="name">whatsapp.message.graph</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <graph string="Messages Graph" type="bar">
+                <field name="status" type="row" />
+                <field name="id" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+
+    <record id="action_whatsapp_messages" model="ir.actions.act_window">
+        <field name="name">WhatsApp Messages</field>
+        <field name="res_model">whatsapp.message</field>
+        <field name="view_mode">tree,kanban,form,graph,calendar</field>
+    </record>
+
+
+    <record id="check_message_fail" model="ir.cron">
+        <field name="name">Whatsapp: Check Message</field>
+        <field name="model_id" ref="model_whatsapp_message" />
+        <field name="state">code</field>
+        <field name="code">model.retry_pending_messages()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_whatsapp_root" name="WhatsApp" sequence="10" />
+    <menuitem id="menu_whatsapp_messages" name="Messages"
+        parent="menu_whatsapp_root"
+        action="action_whatsapp_messages"
+        sequence="1" />
+</odoo>
