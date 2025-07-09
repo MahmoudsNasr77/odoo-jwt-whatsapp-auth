@@ -73,15 +73,15 @@ env['ir.config_parameter'].sudo().set_param('jwt_secret_key', 'your_secret_key_h
 
 ## 🛠️ Installation
 
-# Clone this repo into your custom-addons folder:
+#### Clone this repo into your custom-addons folder:
 
 ```git clone https://github.com/YOUR_USERNAME/odoo-jwt-whatsapp-auth.git```
 
-# Add the module path to your odoo.conf:
+##### Add the module path to your odoo.conf:
 
 ```addons_path = /your/path/to/custom-addons```
 
-# Restart Odoo server and install the module from Apps menu.
+##### Restart Odoo server and install the module from Apps menu.
 
 ## 🧰 Dependencies
 
